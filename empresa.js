@@ -75,6 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTrips();
   }
 
+  // Handle main tabs
+  document.getElementById('tabsMain').addEventListener('click', (e) => {
+    const btn = e.target.closest('.tab');
+    if (!btn) return;
+    document.querySelectorAll('#tabsMain .tab').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    const key = btn.dataset.tab;
+    document.getElementById('tab-nova').classList.add('hidden');
+    document.getElementById('tab-minhas').classList.add('hidden');
+    document.getElementById(`tab-${key}`).classList.remove('hidden');
+    if (key === 'minhas') {
+      renderTrips();
+    }
+  });
+
+
   // Create trip
   document.getElementById('btnCreateTrip').onclick = () => {
     const me = getSession();
