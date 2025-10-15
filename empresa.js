@@ -1,4 +1,3 @@
-
 // Empresa page logic
 document.addEventListener('DOMContentLoaded', () => {
   // Tabs for auth
@@ -54,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('meName').innerHTML = `<strong>${me.name}</strong> (${me.email})`;
     renderTrips();
   }
-
+  
   // Create trip
   document.getElementById('btnCreateTrip').onclick = ()=>{
     const me = getSession(); if(!me) return;
@@ -97,12 +96,29 @@ document.addEventListener('DOMContentLoaded', () => {
     ['tripDriverEmail','tripPlaca','tripModelo','tripCarga','tripOrigem','tripDestino','tripObs'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('tripInicio').value='';
   }
+  
+  // Filter trips
+  document.getElementById('btnFilterTrips').onclick = ()=>{
+    const filterEmail = document.getElementById('filterDriverEmail').value.trim().toLowerCase();
+    renderTrips(filterEmail);
+  };
 
-  function renderTrips(){
+  function renderTrips(filterEmail = null){
     const db = loadDB();
     const me = getSession(); if(!me) return;
     const list = document.getElementById('listTrips'); list.innerHTML='';
-    const trips = db.trips.filter(t=>t.empresaId===me.id);
+
+    let trips = db.trips.filter(t=>t.empresaId===me.id);
+    if(filterEmail){
+      const motorista = db.users.find(u => u.email === filterEmail && u.role === 'motorista');
+      if(motorista){
+        trips = trips.filter(t => t.motoristaId === motorista.id);
+      } else {
+        trips = [];
+        alert('Nenhum motorista ou viagem encontrado com este email.');
+      }
+    }
+    
     let totalFretes=0;
     trips.forEach(t=> totalFretes += t.fretes.length);
     document.getElementById('kpiTrips').innerHTML = `<strong>${trips.length}</strong>`;
@@ -196,10 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
       <tbody id="tbAd">${rowsAd}</tbody></table>
 
       <script>
-        const tripId = ${json.dumps(tripId)!r};
+        const tripId = ${JSON.stringify(tripId)};
 
         window.addFrete = async function(){
-          const data = prompt('Data (AAAA-MM-DD):','${""}');
+          const data = prompt('Data (AAAA-MM-DD):','${todayISO()}');
           if(!data) return;
           const origem = prompt('Origem:');
           const destino = prompt('Destino:');
@@ -210,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         window.addAdiant = async function(){
-          const data = prompt('Data (AAAA-MM-DD):','${""}');
+          const data = prompt('Data (AAAA-MM-DD):','${todayISO()}');
           const valor = parseFloat(prompt('Valor adiantado (R$):','0').replace(',','.'));
           const obs = prompt('Observação (opcional):','');
           if(isNaN(valor)){ alert('Valor inválido.'); return; }
@@ -241,6 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location.reload();
           }
         };
+        
+        function todayISO(){ return new Date().toISOString().slice(0,10); }
       </script>
     </body></html>`);
     w.document.close();
