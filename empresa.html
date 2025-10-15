@@ -1,0 +1,86 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Empresa — SISTEMA DE ACERTO PARA TRANSPORTE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">AT</div>
+        <h1>Empresa — SISTEMA DE ACERTO PARA TRANSPORTE</h1>
+      </div>
+      <nav class="nav">
+        <a class="btn" href="index.html">Início</a>
+        <button class="btn danger" id="btnLogout" type="button">Sair</button>
+      </nav>
+    </header>
+
+    <section class="split">
+      <div class="card" id="authCard">
+        <h2>Acessar</h2>
+        <div class="tabs">
+          <button class="tab active" data-tab="login">Login</button>
+          <button class="tab" data-tab="register">Criar conta</button>
+        </div>
+
+        <div id="tab-login">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="empresa@exemplo.com">
+          <label>Senha</label>
+          <input type="password" id="loginPassword" placeholder="••••••••">
+          <button class="btn primary" id="btnLogin">Entrar</button>
+          <p class="small">Este acesso é exclusivo para <strong>Empresa</strong>.</p>
+        </div>
+
+        <div id="tab-register" class="hidden">
+          <label>Nome</label>
+          <input id="regName" placeholder="Seu nome">
+          <label>Email</label>
+          <input id="regEmail" type="email" placeholder="voce@empresa.com">
+          <label>Senha</label>
+          <input id="regPassword" type="password" placeholder="Crie uma senha">
+          <button class="btn primary" id="btnRegister">Criar conta (Empresa)</button>
+          <p class="small">As credenciais ficam salvas apenas neste dispositivo (localStorage).</p>
+        </div>
+      </div>
+
+      <div class="card" id="dash" class="hidden" style="display:none">
+        <h2>Painel da Empresa</h2>
+        <div class="kpi">
+          <div class="box"><div class="small">Usuário</div><div id="meName"><strong>—</strong></div></div>
+          <div class="box"><div class="small">Viagens</div><div id="kpiTrips"><strong>0</strong></div></div>
+          <div class="box"><div class="small">Fretes</div><div id="kpiFretes"><strong>0</strong></div></div>
+        </div>
+        <hr class="sep">
+        <h3>Nova Viagem</h3>
+        <div class="grid three">
+          <div><label>Motorista (email)</label><input id="tripDriverEmail" placeholder="motorista@exemplo.com"></div>
+          <div><label>Placa</label><input id="tripPlaca" placeholder="ABC1D23"></div>
+          <div><label>Modelo</label><input id="tripModelo" placeholder="Scania P310"></div>
+        </div>
+        <div class="grid three">
+          <div><label>Carga</label><input id="tripCarga" placeholder="Granel, Frigorificada, etc."></div>
+          <div><label>Origem</label><input id="tripOrigem" placeholder="Cidade/UF"></div>
+          <div><label>Destino</label><input id="tripDestino" placeholder="Cidade/UF"></div>
+        </div>
+        <div class="grid two">
+          <div><label>Data de início</label><input type="date" id="tripInicio"></div>
+          <div><label>Observações</label><input id="tripObs" placeholder="Cliente, rota, notas..."></div>
+        </div>
+        <button class="btn primary" id="btnCreateTrip">Criar viagem</button>
+        <hr class="sep">
+        <h3>Minhas Viagens</h3>
+        <div class="list" id="listTrips"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="common.js"></script>
+  <script src="empresa.js"></script>
+</body>
+</html>

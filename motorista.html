@@ -1,0 +1,92 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motorista — SISTEMA DE ACERTO PARA TRANSPORTE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">AT</div>
+        <h1>Motorista — SISTEMA DE ACERTO PARA TRANSPORTE</h1>
+      </div>
+      <nav class="nav">
+        <a class="btn" href="index.html">Início</a>
+        <button class="btn danger" id="btnLogout" type="button">Sair</button>
+      </nav>
+    </header>
+
+    <section class="split">
+      <div class="card" id="authCard">
+        <h2>Acessar</h2>
+        <div class="tabs">
+          <button class="tab active" data-tab="login">Login</button>
+          <button class="tab" data-tab="register">Criar conta</button>
+        </div>
+
+        <div id="tab-login">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="motorista@exemplo.com">
+          <label>Senha</label>
+          <input type="password" id="loginPassword" placeholder="••••••••">
+          <button class="btn primary" id="btnLogin">Entrar</button>
+          <p class="small">Este acesso é exclusivo para <strong>Motorista</strong>.</p>
+        </div>
+
+        <div id="tab-register" class="hidden">
+          <label>Nome</label>
+          <input id="regName" placeholder="Seu nome">
+          <label>Email</label>
+          <input id="regEmail" type="email" placeholder="voce@exemplo.com">
+          <label>Senha</label>
+          <input id="regPassword" type="password" placeholder="Crie uma senha">
+          <button class="btn primary" id="btnRegister">Criar conta (Motorista)</button>
+          <p class="small">As credenciais ficam salvas apenas neste dispositivo (localStorage).</p>
+        </div>
+      </div>
+
+      <div class="card" id="dash" style="display:none">
+        <h2>Painel do Motorista</h2>
+        <div class="tabs" id="tabsMain">
+          <button class="tab active" data-tab="minhas">Minhas Viagens</button>
+          <button class="tab" data-tab="simulador">Simulação de Ganhos</button>
+        </div>
+
+        <div id="tab-minhas">
+          <div class="list" id="listTrips"></div>
+        </div>
+
+        <div id="tab-simulador" class="hidden">
+          <div class="grid three">
+            <div><label>Data</label><input type="date" id="simData" value=""></div>
+            <div><label>Valor bruto (R$)</label><input type="number" id="simBruto" step="0.01" placeholder="0,00"></div>
+            <div><label>Porcentagem (%)</label><input type="number" id="simPct" step="0.01" placeholder="Ex.: 25"></div>
+          </div>
+          <div class="grid two">
+            <div><label>Adiantamento (R$)</label><input type="number" id="simAdiant" step="0.01" placeholder="0,00"></div>
+            <div><label>Observações</label><input id="simObs" placeholder="Opcional"></div>
+          </div>
+          <button class="btn primary" id="btnAddSim">Adicionar à simulação</button>
+          <hr class="sep">
+          <div class="list" id="listSim"></div>
+          <table class="table" style="margin-top:10px">
+            <tbody>
+              <tr><th>Total Bruto</th><td id="simTotalBruto">R$ 0,00</td></tr>
+              <tr><th>Total % Motorista</th><td id="simTotalPct">R$ 0,00</td></tr>
+              <tr><th>Total Adiantamentos</th><td id="simTotalAdiant">R$ 0,00</td></tr>
+              <tr><th>Líquido</th><td id="simTotalLiq"><strong>R$ 0,00</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="common.js"></script>
+  <script src="motorista.js"></script>
+</body>
+</html>
