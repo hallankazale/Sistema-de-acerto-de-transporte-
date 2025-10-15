@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div><strong>Líquido: ${money(totalLiquido)}</strong></div>
           <div style="margin-top:6px;display:flex;gap:6px">
             <button class="btn" data-open="${t.id}">Abrir</button>
+            <button class="btn" data-profile="${t.motoristaId}">Ver Perfil</button>
           </div>
         </div>
       `;
@@ -187,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     list.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openTripModal(b.dataset.open));
+    list.querySelectorAll('[data-profile]').forEach(b => b.onclick = () => window.location.href = `motorista-empresa.html?id=${b.dataset.profile}`);
   }
 
   function openTripModal(tripId) {
