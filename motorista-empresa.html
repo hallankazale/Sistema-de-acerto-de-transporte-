@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil do Motorista — SISTEMA DE ACERTO PARA TRANSPORTE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">AT</div>
+        <h1 id="pageTitle">Perfil do Motorista</h1>
+      </div>
+      <nav class="nav">
+        <a class="btn" href="empresa.html">Voltar</a>
+        <button class="btn danger" id="btnLogout" type="button">Sair</button>
+      </nav>
+    </header>
+
+    <section class="split">
+      <div class="card" id="authCard" style="display:none">
+        <h2>Acesso Negado</h2>
+        <p class="small">Faça login na área da empresa para acessar este recurso.</p>
+      </div>
+
+      <div class="card" id="profileCard">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h2 id="profileName">—</h2>
+          <button class="btn" id="btnEditProfile">Editar</button>
+        </div>
+        <hr class="sep">
+        <div id="profileInfo">
+          <p>Email: <span id="profileEmail">—</span></p>
+          <p>CPF: <span id="profileCpf">—</span></p>
+        </div>
+      </div>
+
+      <div class="card" id="tripsCard">
+        <div class="tabs" id="tabsTrips">
+            <button class="tab active" data-tab="ativas">Viagens Ativas</button>
+            <button class="tab" data-tab="finalizadas">Viagens Finalizadas</button>
+        </div>
+        <div id="tab-ativas" class="list"></div>
+        <div id="tab-finalizadas" class="list hidden"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="editModal" class="modal-bg hidden">
+    <div class="modal-content">
+      <h2>Editar Perfil</h2>
+      <label>Nome</label>
+      <input id="editName">
+      <label>Email</label>
+      <input id="editEmail">
+      <label>CPF</label>
+      <input id="editCpf">
+      <hr class="sep">
+      <div style="display:flex; gap:8px;">
+        <button class="btn primary" id="btnSaveEdit">Salvar</button>
+        <button class="btn" onclick="document.getElementById('editModal').classList.add('hidden')">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="common.js"></script>
+  <script src="motorista-empresa.js"></script>
+</body>
+</html>
