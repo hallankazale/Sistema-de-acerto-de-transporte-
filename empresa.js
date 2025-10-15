@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.classList.add('active');
     const key = btn.dataset.tab;
     document.getElementById('tab-nova').classList.add('hidden');
-    document.getElementById('tab-minhas').classList.add('hidden');
+    document.getElementById('tab-gerenciar').classList.add('hidden');
     document.getElementById(`tab-${key}`).classList.remove('hidden');
-    if (key === 'minhas') {
+    if (key === 'gerenciar') {
       renderTrips();
     }
   });
