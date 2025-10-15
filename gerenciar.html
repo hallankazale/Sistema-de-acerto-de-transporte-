@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerenciar Viagens — SISTEMA DE ACERTO PARA TRANSPORTE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">AT</div>
+        <h1>Gerenciar Viagens</h1>
+      </div>
+      <nav class="nav">
+        <a class="btn" href="empresa.html">Voltar</a>
+        <button class="btn danger" id="btnLogout" type="button">Sair</button>
+      </nav>
+    </header>
+
+    <section class="split">
+        <div class="card" id="mainDash">
+            <h3>Gerenciar Viagens</h3>
+            <div style="margin-bottom: 12px;">
+                <label>Filtrar por Motorista (CPF ou Placa)</label>
+                <input id="filterDriver" placeholder="CPF ou placa" style="margin-bottom:6px">
+                <button class="btn" id="btnFilterTrips">Filtrar</button>
+            </div>
+            <div class="list" id="listTrips"></div>
+        </div>
+    </section>
+  </div>
+
+  <div id="tripModal" class="modal-bg hidden">
+    <div class="modal-content">
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="common.js"></script>
+  <script src="gerenciar.js"></script>
+</body>
+</html>
