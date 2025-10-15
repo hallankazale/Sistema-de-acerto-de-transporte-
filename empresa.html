@@ -58,7 +58,7 @@
         <hr class="sep">
         <h3>Nova Viagem</h3>
         <div class="grid three">
-          <div><label>Motorista (email)</label><input id="tripDriverEmail" placeholder="motorista@exemplo.com"></div>
+          <div><label>CPF do Motorista</label><input id="tripDriverCpf" placeholder="000.000.000-00"></div>
           <div><label>Placa</label><input id="tripPlaca" placeholder="ABC1D23"></div>
           <div><label>Modelo</label><input id="tripModelo" placeholder="Scania P310"></div>
         </div>
@@ -75,13 +75,19 @@
         <hr class="sep">
         <h3>Minhas Viagens</h3>
         <div style="margin-bottom: 12px;">
-          <label>Filtrar por Motorista (email)</label>
-          <input id="filterDriverEmail" placeholder="email@exemplo.com" style="margin-bottom:6px">
+          <label>Filtrar por Motorista (CPF ou Placa)</label>
+          <input id="filterDriver" placeholder="CPF ou placa" style="margin-bottom:6px">
           <button class="btn" id="btnFilterTrips">Filtrar</button>
         </div>
         <div class="list" id="listTrips"></div>
       </div>
     </section>
+  </div>
+
+  <div id="tripModal" class="modal-bg hidden">
+    <div class="modal-content">
+      <div id="modalContent"></div>
+    </div>
   </div>
 
   <script src="common.js"></script>
