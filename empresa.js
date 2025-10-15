@@ -24,6 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const dash = document.getElementById('dash');
   const tripModal = document.getElementById('tripModal');
 
+  // Autocomplete data for cities (example cities)
+  const cities = ["São Paulo/SP", "Rio de Janeiro/RJ", "Belo Horizonte/MG", "Salvador/BA", "Fortaleza/CE", "Curitiba/PR", "Manaus/AM", "Recife/PE", "Brasília/DF", "Porto Alegre/RS", "Natal/RN", "Medianeira/PR"];
+  const datalist = document.getElementById('cities');
+  cities.forEach(city => {
+    const option = document.createElement('option');
+    option.value = city;
+    datalist.appendChild(option);
+  });
+
   btnLogin.onclick = () => {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value;
@@ -96,16 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const me = getSession();
     if (!me) return;
     const driverCpf = document.getElementById('tripDriverCpf').value.trim();
-    const placa = document.getElementById('tripPlaca').value.trim();
+    const placa = document.getElementById('tripPlaca').value.trim().toUpperCase();
     const modelo = document.getElementById('tripModelo').value.trim();
-    const carga = document.getElementById('tripCarga').value.trim();
+    const carga = document.getElementById('tripCarga').value;
     const origem = document.getElementById('tripOrigem').value.trim();
     const destino = document.getElementById('tripDestino').value.trim();
     const dataInicio = document.getElementById('tripInicio').value || todayISO();
     const obs = document.getElementById('tripObs').value.trim();
 
-    if (!driverCpf || !placa || !origem || !destino) {
-      return alert('Preencha CPF do motorista, placa, origem e destino.');
+    if (!driverCpf || !placa || !origem || !destino || !carga) {
+      return alert('Preencha todos os campos obrigatórios (CPF, Placa, Carga, Origem, Destino).');
     }
 
     const db = loadDB();
@@ -145,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function clearTripForm() {
     ['tripDriverCpf', 'tripPlaca', 'tripModelo', 'tripCarga', 'tripOrigem', 'tripDestino', 'tripObs'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('tripInicio').value = '';
+    document.getElementById('tripCarga').value = '';
   }
 
   // Filter trips
