@@ -69,9 +69,24 @@
             <div><label>Modelo</label><input id="tripModelo" placeholder="Scania P310"></div>
           </div>
           <div class="grid three">
-            <div><label>Carga</label><input id="tripCarga" placeholder="Granel, Frigorificada, etc."></div>
-            <div><label>Origem</label><input id="tripOrigem" placeholder="Cidade/UF"></div>
-            <div><label>Destino</label><input id="tripDestino" placeholder="Cidade/UF"></div>
+            <div><label>Carga</label>
+              <select id="tripCarga">
+                <option value="">Selecione...</option>
+                <option value="Granel">Granel</option>
+                <option value="Frigorificada">Frigorificada</option>
+                <option value="Seca">Seca</option>
+                <option value="Química">Química</option>
+                <option value="Perigosa">Perigosa</option>
+                <option value="Outra">Outra</option>
+              </select>
+            </div>
+            <div><label>Origem</label>
+              <input list="cities" id="tripOrigem" placeholder="Cidade/UF">
+              <datalist id="cities"></datalist>
+            </div>
+            <div><label>Destino</label>
+              <input list="cities" id="tripDestino" placeholder="Cidade/UF">
+            </div>
           </div>
           <div class="grid two">
             <div><label>Data de início</label><input type="date" id="tripInicio"></div>
