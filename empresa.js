@@ -261,8 +261,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="box"><b>Líquido</b><div>${money(totalLiquido)}</div></div>
       </div>
       <div class="actions">
-        <button class="btn primary" onclick="addFrete('${tripId}')">Adicionar Frete</button>
-        <button class="btn primary" onclick="addAdiant('${tripId}')">Adicionar Adiantamento</button>
+        <button class="btn primary" onclick="openFreteModal('${t.id}')">Adicionar Frete</button>
+        <button class="btn primary" data-open-adiantamento="${t.id}">Adicionar Adiantamento</button>
         <button class="btn" onclick="closeTripModal()">Fechar</button>
       </div>
 
@@ -276,6 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     tripModal.classList.remove('hidden');
+
+    document.querySelector('[data-open-adiantamento]').onclick = (e) => openAdiantamentoModal(e.target.dataset.openAdiantamento);
   }
 
   window.closeTripModal = () => {
@@ -283,8 +285,64 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modalContent').innerHTML = '';
     renderTrips();
   }
+  
+  // New modal logic for adiantamento
+  const adiantamentoModal = document.getElementById('adiantamentoModal');
+  let currentTripIdForAdiantamento = null;
+  
+  function openAdiantamentoModal(tripId) {
+    currentTripIdForAdiantamento = tripId;
+    document.getElementById('adData').value = todayISO();
+    document.getElementById('adValor').value = '';
+    document.getElementById('adObs').value = '';
+    document.getElementById('adComprovante').value = '';
+    adiantamentoModal.classList.remove('hidden');
+  }
 
-  window.addFrete = (tripId) => {
+  document.getElementById('btnSaveAdiantamento').onclick = async () => {
+    const data = document.getElementById('adData').value;
+    const valor = Number(document.getElementById('adValor').value);
+    const obs = document.getElementById('adObs').value.trim();
+    const file = document.getElementById('adComprovante').files[0];
+
+    if (!data || isNaN(valor) || valor <= 0) {
+      alert('Preencha a data e um valor de adiantamento válido.');
+      return;
+    }
+
+    let fileData = null;
+    let fileName = null;
+    if (file) {
+      fileName = file.name;
+      fileData = await fileToDataURL(file);
+    }
+    
+    const db = loadDB();
+    const t = db.trips.find(x => x.id === currentTripIdForAdiantamento);
+    if (!t) {
+        alert('Viagem não encontrada.');
+        return;
+    }
+
+    t.adiantamentos.push({
+      id: uid(),
+      data: data,
+      valor: valor,
+      obs: obs,
+      fileName: fileName,
+      fileData: fileData
+    });
+    saveDB(db);
+    adiantamentoModal.classList.add('hidden');
+    openTripModal(currentTripIdForAdiantamento);
+  }
+
+  document.getElementById('btnCancelAdiantamento').onclick = () => {
+    adiantamentoModal.classList.add('hidden');
+  };
+
+  // Old functions (now called from the new modal flow)
+  window.openFreteModal = (tripId) => {
     const data = prompt('Data (AAAA-MM-DD):', todayISO());
     if (!data) return;
     const origem = prompt('Origem:');
@@ -309,45 +367,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     saveDB(db);
     openTripModal(tripId);
-  }
-
-  window.addAdiant = async (tripId) => {
-    const data = prompt('Data (AAAA-MM-DD):', todayISO());
-    const valor = parseFloat(prompt('Valor adiantado (R$):', '0').replace(',', '.'));
-    const obs = prompt('Observação (opcional):', '');
-    if (isNaN(valor)) {
-      alert('Valor inválido.');
-      return;
-    }
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.png,.jpg,.jpeg,.pdf,image/*,application/pdf';
-    input.style.display = 'none';
-    document.body.appendChild(input);
-    input.onchange = async () => {
-      const f = input.files[0];
-      let fileData = null,
-        fileName = null;
-      if (f) {
-        fileName = f.name;
-        fileData = await fileToDataURL(f);
-      }
-
-      const db = loadDB();
-      const t = db.trips.find(x => x.id === tripId);
-      if (!t) return;
-      t.adiantamentos.push({
-        id: uid(),
-        data: data,
-        valor: Number(valor),
-        obs: obs,
-        fileName: fileName,
-        fileData: fileData
-      });
-      saveDB(db);
-      openTripModal(tripId);
-    };
-    input.click();
-    document.body.removeChild(input);
   }
 });
