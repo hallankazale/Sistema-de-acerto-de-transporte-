@@ -58,7 +58,7 @@
         <hr class="sep">
         <div class="tabs" id="tabsMain">
           <button class="tab active" data-tab="nova">Nova Viagem</button>
-          <button class="tab" data-tab="gerenciar">Gerenciar Viagens</button>
+          <a class="btn" href="gerenciar.html">Gerenciar Viagens</a>
         </div>
 
         <div id="tab-nova">
@@ -94,54 +94,8 @@
           </div>
           <button class="btn primary" id="btnCreateTrip">Criar viagem</button>
         </div>
-
-        <div id="tab-gerenciar" class="hidden">
-          <h3>Gerenciar Viagens</h3>
-          <div style="margin-bottom: 12px;">
-            <label>Filtrar por Motorista (CPF ou Placa)</label>
-            <input id="filterDriver" placeholder="CPF ou placa" style="margin-bottom:6px">
-            <button class="btn" id="btnFilterTrips">Filtrar</button>
-          </div>
-          <div class="list" id="listTrips"></div>
-        </div>
       </div>
     </section>
-  </div>
-
-  <div id="tripModal" class="modal-bg hidden">
-    <div class="modal-content">
-      <div id="modalContent"></div>
-    </div>
-  </div>
-  
-  <div id="adiantamentoModal" class="modal-bg hidden">
-    <div class="modal-content">
-      <h2 id="adiantamentoTitle">Adicionar Adiantamento</h2>
-      <hr class="sep">
-      <div class="grid two">
-        <div>
-          <label for="adData">Data</label>
-          <input type="date" id="adData">
-        </div>
-        <div>
-          <label for="adValor">Valor (R$)</label>
-          <input type="number" id="adValor" step="0.01">
-        </div>
-      </div>
-      <div>
-        <label for="adObs">Observação</label>
-        <input id="adObs" placeholder="Descrição ou motivo">
-      </div>
-      <div>
-        <label for="adComprovante">Comprovante (opcional)</label>
-        <input type="file" id="adComprovante" accept=".png,.jpg,.jpeg,.pdf,image/*,application/pdf">
-      </div>
-      <hr class="sep">
-      <div style="display:flex; gap:8px;">
-        <button class="btn primary" id="btnSaveAdiantamento">Salvar</button>
-        <button class="btn" id="btnCancelAdiantamento">Cancelar</button>
-      </div>
-    </div>
   </div>
 
   <script src="common.js"></script>
