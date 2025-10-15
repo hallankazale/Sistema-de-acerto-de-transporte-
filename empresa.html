@@ -113,6 +113,36 @@
       <div id="modalContent"></div>
     </div>
   </div>
+  
+  <div id="adiantamentoModal" class="modal-bg hidden">
+    <div class="modal-content">
+      <h2 id="adiantamentoTitle">Adicionar Adiantamento</h2>
+      <hr class="sep">
+      <div class="grid two">
+        <div>
+          <label for="adData">Data</label>
+          <input type="date" id="adData">
+        </div>
+        <div>
+          <label for="adValor">Valor (R$)</label>
+          <input type="number" id="adValor" step="0.01">
+        </div>
+      </div>
+      <div>
+        <label for="adObs">Observação</label>
+        <input id="adObs" placeholder="Descrição ou motivo">
+      </div>
+      <div>
+        <label for="adComprovante">Comprovante (opcional)</label>
+        <input type="file" id="adComprovante" accept=".png,.jpg,.jpeg,.pdf,image/*,application/pdf">
+      </div>
+      <hr class="sep">
+      <div style="display:flex; gap:8px;">
+        <button class="btn primary" id="btnSaveAdiantamento">Salvar</button>
+        <button class="btn" id="btnCancelAdiantamento">Cancelar</button>
+      </div>
+    </div>
+  </div>
 
   <script src="common.js"></script>
   <script src="empresa.js"></script>
