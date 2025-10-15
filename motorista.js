@@ -1,4 +1,3 @@
-
 // Motorista page logic
 document.addEventListener('DOMContentLoaded', () => {
   // Tabs for auth
@@ -49,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showDash(){
     authCard.style.display='none'; dash.style.display='block';
+    const me = getSession();
+    document.getElementById('meName').innerHTML = `Olá, <strong>${me.name}</strong>!`;
     document.getElementById('simData').value = todayISO();
     renderTrips();
     renderSim();
