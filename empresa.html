@@ -56,30 +56,39 @@
           <div class="box"><div class="small">Fretes</div><div id="kpiFretes"><strong>0</strong></div></div>
         </div>
         <hr class="sep">
-        <h3>Nova Viagem</h3>
-        <div class="grid three">
-          <div><label>CPF do Motorista</label><input id="tripDriverCpf" placeholder="000.000.000-00"></div>
-          <div><label>Placa</label><input id="tripPlaca" placeholder="ABC1D23"></div>
-          <div><label>Modelo</label><input id="tripModelo" placeholder="Scania P310"></div>
+        <div class="tabs" id="tabsMain">
+          <button class="tab active" data-tab="nova">Nova Viagem</button>
+          <button class="tab" data-tab="gerenciar">Gerenciar Viagens</button>
         </div>
-        <div class="grid three">
-          <div><label>Carga</label><input id="tripCarga" placeholder="Granel, Frigorificada, etc."></div>
-          <div><label>Origem</label><input id="tripOrigem" placeholder="Cidade/UF"></div>
-          <div><label>Destino</label><input id="tripDestino" placeholder="Cidade/UF"></div>
+
+        <div id="tab-nova">
+          <h3>Nova Viagem</h3>
+          <div class="grid three">
+            <div><label>CPF do Motorista</label><input id="tripDriverCpf" placeholder="000.000.000-00"></div>
+            <div><label>Placa</label><input id="tripPlaca" placeholder="ABC1D23"></div>
+            <div><label>Modelo</label><input id="tripModelo" placeholder="Scania P310"></div>
+          </div>
+          <div class="grid three">
+            <div><label>Carga</label><input id="tripCarga" placeholder="Granel, Frigorificada, etc."></div>
+            <div><label>Origem</label><input id="tripOrigem" placeholder="Cidade/UF"></div>
+            <div><label>Destino</label><input id="tripDestino" placeholder="Cidade/UF"></div>
+          </div>
+          <div class="grid two">
+            <div><label>Data de início</label><input type="date" id="tripInicio"></div>
+            <div><label>Observações</label><input id="tripObs" placeholder="Cliente, rota, notas..."></div>
+          </div>
+          <button class="btn primary" id="btnCreateTrip">Criar viagem</button>
         </div>
-        <div class="grid two">
-          <div><label>Data de início</label><input type="date" id="tripInicio"></div>
-          <div><label>Observações</label><input id="tripObs" placeholder="Cliente, rota, notas..."></div>
+
+        <div id="tab-gerenciar" class="hidden">
+          <h3>Gerenciar Viagens</h3>
+          <div style="margin-bottom: 12px;">
+            <label>Filtrar por Motorista (CPF ou Placa)</label>
+            <input id="filterDriver" placeholder="CPF ou placa" style="margin-bottom:6px">
+            <button class="btn" id="btnFilterTrips">Filtrar</button>
+          </div>
+          <div class="list" id="listTrips"></div>
         </div>
-        <button class="btn primary" id="btnCreateTrip">Criar viagem</button>
-        <hr class="sep">
-        <h3>Minhas Viagens</h3>
-        <div style="margin-bottom: 12px;">
-          <label>Filtrar por Motorista (CPF ou Placa)</label>
-          <input id="filterDriver" placeholder="CPF ou placa" style="margin-bottom:6px">
-          <button class="btn" id="btnFilterTrips">Filtrar</button>
-        </div>
-        <div class="list" id="listTrips"></div>
       </div>
     </section>
   </div>
